@@ -7,3 +7,11 @@ export class CreateAccountRequestDto
   @IsEmail()
   email: string;
 }
+
+export type CreateAccountResponseDto = Pick<
+  FindAccountResponse,
+  'accountID' | 'email' | 'isDeleted'
+> & {
+  createdAt?: Date;
+  updatedAt?: Date;
+};

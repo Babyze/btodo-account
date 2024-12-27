@@ -28,7 +28,13 @@ export interface CreateAccountRequest {
   email: string;
 }
 
-export interface CreateAccountResponse {}
+export interface CreateAccountResponse {
+  accountID: number;
+  email: string;
+  isDeleted: boolean;
+  createdAt?: Timestamp | undefined;
+  updatedAt?: Timestamp | undefined;
+}
 
 export const BTODO_ACCOUNT_PACKAGE_NAME = 'btodo.account';
 

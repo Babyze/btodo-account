@@ -1,3 +1,6 @@
+import { AllExceptionFilter } from '@app/common/filters/rpc-to-http-exception.filter';
+import { GrpcDataTransformInterceptor } from '@app/common/interceptors/grpc-data-transform-interceptor.interceptor';
+import { GrpcDataTransformPipe } from '@app/common/pipes/grpc-data-transform-pipe.pipe';
 import {
   Controller,
   UseFilters,
@@ -7,15 +10,15 @@ import {
 } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import { AccountService } from './account.service';
-import { CreateAccountRequestDto } from './dto/create-account.dto';
+import {
+  CreateAccountRequestDto,
+  CreateAccountResponseDto,
+} from './dto/create-account.dto';
 import {
   FindAccountRequestDto,
   FindAccountResponseDto,
 } from './dto/find-account.dto';
-import { ACCOUNT_SERVICE_NAME, CreateAccountResponse } from './pb/account.pb';
-import { GrpcDataTransformPipe } from '@app/common/pipes/grpc-data-transform-pipe.pipe';
-import { GrpcDataTransformInterceptor } from '@app/common/interceptors/grpc-data-transform-interceptor.interceptor';
-import { AllExceptionFilter } from '@app/common/filters/rpc-to-http-exception.filter';
+import { ACCOUNT_SERVICE_NAME } from './pb/account.pb';
 
 @Controller()
 @UsePipes(GrpcDataTransformPipe, ValidationPipe)
@@ -34,7 +37,7 @@ export class AccountController {
   @GrpcMethod(ACCOUNT_SERVICE_NAME, 'CreateAccount')
   private async CreateAccount(
     payload: CreateAccountRequestDto,
-  ): Promise<CreateAccountResponse> {
+  ): Promise<CreateAccountResponseDto> {
     return this.accountService.createAccount(payload);
   }
 }
