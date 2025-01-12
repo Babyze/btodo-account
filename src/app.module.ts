@@ -22,7 +22,6 @@ import { LoggerModule } from 'nestjs-pino';
         GRPC_HOST: Joi.string().required(),
         GRPC_PORT: Joi.number().required(),
         GRPC_ACCOUNT_PROTO_PATH: Joi.string().required(),
-        GRPC_UTILS_TIMESTAMP_PROTO_PATH: Joi.string().required(),
       }),
     }),
     TypeOrmModule.forRootAsync({
